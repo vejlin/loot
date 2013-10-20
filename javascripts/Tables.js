@@ -55,7 +55,7 @@ function treasure(type) {
 		magicItem(loot);
 	}
 	loot.money = money;
-	alert(loot.getInfo());
+	return loot;
 }
 
 function magicItem(loot) {

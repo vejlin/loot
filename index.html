@@ -2,6 +2,20 @@
 <html>
 <head>
 	<script type="text/javascript" src="javascripts/Tables.js"></script>
+	<style type="text/css" media="screen">
+	 body {
+	   font: 12pt "Verdana";
+	 }
+	 #output {
+ 	   font: 12pt "Monarco", "Courier New";
+	   color: gray;
+	   background-color: #efefef;
+	 }
+	 #output div:first-child {
+	   color: black;
+	   font-weight: bold;
+	 }
+	</style>
 </head>
 <body>
 	<p>Choose type of treasure</p>
@@ -12,14 +26,19 @@
      	<option value="4">Treasure Trove</option>
 	</select>
 
-<p>Click the button to get loot</p>
+<p>Click the button to get loot: <button onclick="loot(getOption('treasure'))">Loot</button></p>
 
-<button onclick="loot(getOption('treasure'))">Loot</button>
+<div id="output"></div>
+
+
 
 <script>
 function loot(type)
 {
-	treasure(type);
+	var line = document.createElement("div");
+	line.innerHTML = treasure(type).getInfo();
+	var output = document.getElementById("output");
+	output.insertBefore(line, output.firstChild);
 }
 function getOption(optionName) {
 	var e = document.getElementById(optionName);
