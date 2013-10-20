@@ -83,15 +83,15 @@ function magicItem(loot) {
 }
 
 function table1A(magicItem) {
-	var die = rollDie(2);
+	var die = rollDie(20);
 	if (die <= 15) {
 		magicItem.type = 'Armor';
 		table1B(magicItem);
 	} else if (die > 15 && die <= 19 ) {
 		magicItem.type = 'Shield';
-		// table1D();
+		table1D(magicItem);
 	} else if (die == 20 ) {
-		// table1J();
+		table1J(magicItem);
 	}
 }
 // //Table 1B: Armor
@@ -164,7 +164,7 @@ function table1E(magicItem, dieNumber) {
 	if (die <= 10) {
 		magicItem.price += 6000;
 		magicItem.description = '+1 Parry (Block)';
-	} else if (die > 10 && die <= 16 ) {
+	} else if (die > 10 && die <= 19 ) {
 		magicItem.price += 8000;
 		magicItem.description = '+2 Parry (Imp Block)';
 	} else if (die == 20 ) {
@@ -183,7 +183,7 @@ function table1J(magicItem) {
 		magicItem.price = 6550;
 		magicItem.type = 'Armor';
 		magicItem.subType = 'Leather';
-		magicItem.description = 'Assassin’s Armor (p51)';
+		magicItem.description = "Assassin's Armor (p51)";
 	} else if (die > 2 && die <= 7 ) {
 		magicItem.price = 2400;
 		magicItem.type = 'Armor';
@@ -198,7 +198,7 @@ function table1J(magicItem) {
 		magicItem.price = 4300;
 		magicItem.type = 'Armor';
 		magicItem.subType = 'Chain hauberk';
-		magicItem.description = 'Dragon Slayer’s Armor (p51)';		
+		magicItem.description = "Dragon Slayer's Armor (p51)";		
 	} else if (die > 12 && die <= 15 ) {
 		magicItem.price = 5300;
 		magicItem.type = 'Armor';
@@ -209,12 +209,11 @@ function table1J(magicItem) {
 		magicItem.type = 'Helm';
 		magicItem.subType = 'Steel helmet';
 		magicItem.description = 'Helm of the General (p51)';		
-		magicItem.description = 'Helm of the General (p51)';				
 	} else if (die > 17) {
 		magicItem.price = 2050;
 		magicItem.type = 'Armor';
 		magicItem.subType = 'Leather';
-		magicItem.description = 'Thief’s Jerkin (p51)';		
+		magicItem.description = "Thief's Jerkin (p51)";		
 	}
 }
 
