@@ -15,9 +15,10 @@ function Loot () {
 //Magic Item object
 function MagicItem () {
     this.price = 0;
+    this.type = '';
     this.description = '';
     this.getInfo = function getInfo() {
-        return 'Price: ' + this.money + ' Description: ' + this.description;
+        return 'Price: ' + this.price + ' Type: ' + this.type + ' Description: ' + this.description;
     };
 }
 
@@ -34,31 +35,68 @@ function treasure(type) {
 	if (type == 1) {
 		money = 10 * treasureDie;
 		if (magicItemPercent == 1) {
-			loot.magicItem = new MagicItem();
+			magicItem(loot);
 		}
 	}
 	else if (type == 2) {
 		money = 100 * treasureDie;
 		if (magicItemPercent <= 25) {
-			loot.magicItem = new MagicItem();
+			magicItem(loot);
 		}
 	}
 	else if (type == 3) {
 		money = 500 * treasureDie;
 		if (magicItemPercent <= 50) {
-			loot.magicItem = new MagicItem();
+			magicItem(loot);
 		}
 	}
 	else if (type == 4) {
 		money = 1000 * treasureDie;
-		loot.magicItem = new MagicItem();
+		magicItem(loot);
 	}
 	loot.money = money;
 	alert(loot.getInfo());
 }
 
-function magicItem() {
+function magicItem(loot) {
+	loot.magicItem = new MagicItem();
+	var die = rollDie(2);
+	if (die <= 2 ) {
+		table1A(loot.magicItem);
+	// } else if (die > 2 && die <= 5 ) {
+	// 	table2A(magicItem);
+	// } else if (die > 6 && die <= 7 ) {
+	// 	table3A(magicItem);
+	// } else if (die > 8 && die <= 11 ) {
+	// 	table4A(magicItem);
+	// } else if (die > 12 && die <= 14 ) {
+	// 	table5(magicItem);
+	// } else if (die > 15 && die <= 16 ) {
+	// 	table6(magicItem);
+	// } else if (die > 16 && die <= 18 ) {
+	// 	table7A(magicItem);
+	// } else if (die == 19 ) {
+	// 	table8(magicItem);
+	// } else if (die == 20 ) {
+	// 	table9A(magicItem);
+	}
+}
 
+function table1A(magicItem) {
+	var die = rollDie(2);
+	if (die <= 15) {
+		magicItem.type = 'Armor';
+		table1B(magicItem);
+	} else if (die > 15 && die <= 19 ) {
+		magicItem.type = 'Shield';
+		// table1D();
+	} else if (die == 20 ) {
+		// table1J();
+	}
+}
+
+function table1B(magicItem) {
+	magicItem.price = 20;
 }
 
 function rollDie(sides)
