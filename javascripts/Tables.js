@@ -1,3 +1,4 @@
+//Side 48 Fantasy Companion
 //Loot object for displaying the end result
 function Loot () {
     this.money = 0;
@@ -138,7 +139,7 @@ function table1C(magicItem, dieNumber) {
 		magicItem.description = '+3 Toughness';
 	} else if (die == 20 ) {
 		table1C(magicItem, 19);
-		// table1F(magicItem);
+		table1F(magicItem, 20);
 	}
 }
 
@@ -181,9 +182,9 @@ function table1F(magicItem, dieNumber) {
 	var die = rollDie(dieNumber);
 	if (die <= 9) {
 		magicItem.price += 1000;
-		//table1G(magicItem);
+		table1G(magicItem);
 	} else if (die > 9 && die <= 13 ) {
-		//table1H(magicItem, rollDie(3));
+		table1H(magicItem);
 	} else if (die > 13 && die <= 16 ) {
 		magicItem.price += 3500;
 		//table1I(magicItem, rollDie(2), "Minor");
@@ -194,8 +195,101 @@ function table1F(magicItem, dieNumber) {
 		magicItem.price += 3000;
 		//table1I(magicItem, 1, "Major with raise");
 	} else if (die == 20 ) {
-		//table1F(magicItem, 19);
-		//table1F(magicItem, 19);
+		table1F(magicItem, 19);
+		table1F(magicItem, 19);
+	}
+}
+
+// //Table 1G: Skill Bonuses
+// //Bonuses can be applied to a single skill (to a maximum of +3) or spread across multiple skills. You can either pick skills or roll randomly on Table 1G, applying a +1 bonus to each skill rolled.
+
+// //random 1-6 hvis 1-3 bliver værdien sat som +X til en skill
+// //hvis 4-6 deles værdien op på 2 skills
+function table1G(magicItem) {
+	var skillValue = rollDie(6);
+	while (skillValue != 0) {
+		var die = rollDie(20);
+		var skill = '';
+		if (die <= 4) {
+			skill = ' Climbing ';
+		} else if (die > 4 && die <= 7 ) {
+			skill = ' Spirit rolls against fear ';
+		} else if (die > 7 && die <= 10 ) {
+			skill = ' Intimidation ';
+		} else if (die > 10 && die <= 13 ) {
+			skill = ' Persuasion ';
+		} else if (die > 13 && die <= 17 ) {
+			skill = ' Stealth ';
+		} else if (die > 17 ) {
+			skill = ' Swimming ';
+		}
+		if (skillValue >= 3) {
+			magicItem.description += skill + '+' + 3;
+			skillValue = skillValue - 3;
+		} else {
+			magicItem.description += skill + '+' + skillValue;		
+			skillValue = 0;	
+		}
+	}
+}
+
+
+
+// //Table 1H: Edges
+// //Either choose one or roll on Table 1H. Edge names followed by a (2) are Edges which have an Edge requirement, and so fill two slots. Reroll if you roll one when you have a single Edge slot left. Should you roll such an Edge and already have the requisite version (such as rolling Improved Dodge when you have Dodge), upgrade the Edge at the cost of one additional slot.
+// //d20 Cost Type
+function table1H(magicItem) {
+	var edgeValue = rollDie(3);
+	while (edgeValue != 0) {
+		var die = rollDie(20);
+		var edge = '';
+		var price = 0;
+		var slot = 1;
+		if (die <= 3) {
+			price += 2000;
+			edge = ' Arcane Resistance ';
+		} else if (die > 3 && die <= 5 ) {
+			price += 2000;
+			edge = ' Berserk ';
+		} else if (die > 5 && die <= 7 ) {
+			price += 2000;
+			edge = ' Charismatic ';
+		} else if (die == 8 ) {
+			price += 2000;
+			edge = ' Command ';
+		} else if (die == 9 ) {
+			price += 2000;
+			edge = ' Danger Sense ';
+		} else if (die > 9 && die <= 11 ) {
+			price += 6000;
+			edge = ' Dodge ';
+		} else if (die > 11 && die <= 13 ) {
+			price += 2000;
+			edge = ' Fleet Footed ';
+		} else if (die > 13 && die <= 15 ) {
+			price += 2000;
+			edge = ' Hard to Kill ';
+		} else if (die == 16 && edgeValue >= 2) {
+			price += 8000;
+			edge = ' Harder to Kill ';
+			slot = 2;
+		} else if (die == 17 && edgeValue >= 2) {
+			price += 4000;
+			edge = ' Improved Arcane Resistance ';
+			slot = 2;
+		} else if (die == 18 && edgeValue >= 2) {
+			price += 14000;
+			edge = ' Improved Dodge ';
+			slot = 2
+		} else if (die > 18 ) {
+			price += 2000;
+			edge = ' Quick ';			
+		}
+		if (magicItem.description.indexOf(edge) == -1) {
+			edgeValue = edgeValue - slot;
+			magicItem.description += edge;		
+			magicItem.price += price;
+		}
 	}
 }
 
@@ -241,106 +335,9 @@ function table1J(magicItem) {
 }
 
 
-
-function rollDie(sides)
-  {
-    if(!sides) sides = 6;
-    with(Math) return 1 + floor(random() * sides);
-  }
-
-  function rollDice(number, sides)
-  {
-    var total = 0;
-    while(number-- > 0) total += rollDie(sides);
-    return total;
-  }
-
-
-  //Side 48 Fantasy Companion
-
-
-
-// //Table 1F: Special Armor & Shields
-// //Roll on the table below to determine the specific powers. Prices for skills are per bonus. If a power has no extra effect on a raise, treat rolls of 19 as rolls of 17–18.
-// //d20 Cost Type
-// 1 $1000 + Table1G
-// 2 $1000 + Table1G
-// 3 $1000 + Table1G
-// 4 $1000 + Table1G
-// 5 $1000 + Table1G
-// 6 $1000 + Table1G
-// 7 $1000 + Table1G
-// 8 $1000 + Table1G
-// 9 $1000 + Table1G
-// 10 Var 1d3 x Table1H
-// 11 Var 1d3 x Table1H
-// 12 Var 1d3 x Table1H
-// 13 Var 1d3 x Table1H
-// 14 +$3500 Minor Artifact: 1d2 powers (Table 1I)*
-// 15 +$3500 Minor Artifact: 1d2 powers (Table 1I)*
-// 16 +$3500 Minor Artifact: 1d2 powers (Table 1I)*
-// 17 +$2000 Major Artifact: 1 power (Table 1I)**
-// 18 +$2000 Major Artifact: 1 power (Table 1I)**
-// 19 +$3000 Major Artifact: 1 power " with raise" (Table 1I)**
-// 20 2x1d19 på Table1F
-// //* Plus $1000 per spell Rank.
-// //** Per Power Point of the power invested, plus $1000 per spell Rank
-
-
-// //Table 1G: Skill Bonuses
-// //Bonuses can be applied to a single skill (to a maximum of +3) or spread across multiple skills. You can either pick skills or roll randomly on Table 1G, applying a +1 bonus to each skill rolled.
-
-// //random 1-6 hvis 1-3 bliver værdien sat som +X til en skill
-// //hvis 4-6 deles værdien op på 2 skills
-
-// //d20 Type
-// 1 "Climbing"
-// 2 "Climbing"
-// 3 "Climbing"
-// 4 "Climbing"
-// 5 "Spirit rolls against fear"
-// 6 "Spirit rolls against fear"
-// 7 "Spirit rolls against fear"
-// 8 "Intimidation"
-// 9 "Intimidation"
-// 10 "Intimidation"
-// 11 "Persuasion"
-// 12 "Persuasion"
-// 13 "Persuasion"
-// 14 "Stealth"
-// 15 "Stealth"
-// 16 "Stealth"
-// 17 "Stealth"
-// 18 "Swimming"
-// 19 "Swimming"
-// 20 "Swimming"
-
-// //Table 1H: Edges
-// //Either choose one or roll on Table 1H. Edge names followed by a (2) are Edges which have an Edge requirement, and so fill two slots. Reroll if you roll one when you have a single Edge slot left. Should you roll such an Edge and already have the requisite version (such as rolling Improved Dodge when you have Dodge), upgrade the Edge at the cost of one additional slot.
-// //d20 Cost Type
-// 1 "+$2000 Arcane Resistance"
-// 2 "+$2000 Arcane Resistance"
-// 3 "+$2000 Arcane Resistance"
-// 4 "+$2000 Berserk"
-// 5 "+$2000 Berserk"
-// 6 "+$2000 Charismatic"
-// 7 "+$2000 Charismatic"
-// 8 "+$2000 Command"
-// 9 "+$2000 Danger Sense"
-// 10 "+$6000 Dodge"
-// 11 "+$6000 Dodge"
-// 12 "+$2000 Fleet Footed"
-// 13 "+$2000 Fleet Footed"
-// 14 "+$2000 Hard to Kill"
-// 15 "+$2000 Hard to Kill"
-// 16 "+$8000 Harder to Kill (2)"
-// 17 "+$4000 Improved Arcane Resistance (2)"
-// 18 "+$14000 Improved Dodge (2)"
-// 19 "+$2000 Quick"
-// 20 "+$2000 Quick"
-
 // //Table 1I: Powers
 // //Powers are rolled or chosen from Table 1I. Powers which can affect multiple aspects (such as boost trait) must have a single, fixed aspect chosen during creation. This cannot be changed. Unless otherwise stated, magic items that cast powers have an arcane skill of d8 and 10 Power Points.
+
 // //d20 Type
 // 1 "Beast Friend"
 // 2 "Boost Trait (usually Smarts or Spirit in a helmet, Agility, Strength, or Vigor in armor)"
@@ -362,4 +359,21 @@ function rollDie(sides)
 // 18 "Speed"
 // 19 "Speed"
 // 20 "Teleport"
+
+
+
+function rollDie(sides)
+  {
+    if(!sides) sides = 6;
+    with(Math) return 1 + floor(random() * sides);
+  }
+
+  function rollDice(number, sides)
+  {
+    var total = 0;
+    while(number-- > 0) total += rollDie(sides);
+    return total;
+  }
+
+
 
