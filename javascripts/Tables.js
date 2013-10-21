@@ -169,12 +169,35 @@ function table1E(magicItem, dieNumber) {
 		magicItem.description = '+2 Parry (Imp Block)';
 	} else if (die == 20 ) {
 		table1C(magicItem, 19);
-		// table1F(magicItem);
+		table1F(magicItem, 20);
 	}
 }
 
-
-
+// //Table 1F: Special Armor & Shields
+// //Roll on the table below to determine the specific powers. Prices for skills are per bonus. If a power has no extra effect on a raise, treat rolls of 19 as rolls of 17–18.
+// //* Plus $1000 per spell Rank.
+// //** Per Power Point of the power invested, plus $1000 per spell Rank
+function table1F(magicItem, dieNumber) {
+	var die = rollDie(dieNumber);
+	if (die <= 9) {
+		magicItem.price += 1000;
+		//table1G(magicItem);
+	} else if (die > 9 && die <= 13 ) {
+		//table1H(magicItem, rollDie(3));
+	} else if (die > 13 && die <= 16 ) {
+		magicItem.price += 3500;
+		//table1I(magicItem, rollDie(2), "Minor");
+	} else if (die > 16 && die <= 18 ) {
+		magicItem.price += 2000;
+		//table1I(magicItem, 1, "Major");
+	} else if (die == 19 ) {
+		magicItem.price += 3000;
+		//table1I(magicItem, 1, "Major with raise");
+	} else if (die == 20 ) {
+		//table1F(magicItem, 19);
+		//table1F(magicItem, 19);
+	}
+}
 
 // //Table 1J: Named Items
 function table1J(magicItem) {
@@ -217,6 +240,8 @@ function table1J(magicItem) {
 	}
 }
 
+
+
 function rollDie(sides)
   {
     if(!sides) sides = 6;
@@ -232,6 +257,7 @@ function rollDie(sides)
 
 
   //Side 48 Fantasy Companion
+
 
 
 // //Table 1F: Special Armor & Shields
