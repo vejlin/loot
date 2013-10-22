@@ -187,13 +187,13 @@ function table1F(magicItem, dieNumber) {
 		table1H(magicItem);
 	} else if (die > 13 && die <= 16 ) {
 		magicItem.price += 3500;
-		//table1I(magicItem, rollDie(2), "Minor");
+		table1I(magicItem, rollDie(2), "Minor");
 	} else if (die > 16 && die <= 18 ) {
 		magicItem.price += 2000;
-		//table1I(magicItem, 1, "Major");
+		table1I(magicItem, 1, "Major");
 	} else if (die == 19 ) {
 		magicItem.price += 3000;
-		//table1I(magicItem, 1, "Major with raise");
+		table1I(magicItem, 1, "Major with raise");
 	} else if (die == 20 ) {
 		table1F(magicItem, 19);
 		table1F(magicItem, 19);
@@ -293,6 +293,58 @@ function table1H(magicItem) {
 	}
 }
 
+// //Table 1I: Powers
+// //Powers are rolled or chosen from Table 1I. Powers which can affect multiple aspects (such as boost trait) must have a single, fixed aspect chosen during creation. This cannot be changed. Unless otherwise stated, magic items that cast powers have an arcane skill of d8 and 10 Power Points.
+function table1I(magicItem, powerNumber, typeOfPower) {
+	while(powerNumber != 0) {
+		var die = rollDie(20);
+		if (die == 1) {
+			magicItem.description += ' ' + typeOfPower + ' Beast Friend';
+		} else if (die > 1 && die <= 3 ) {
+			if (magicItem.type == 'Helm') {
+				if (rollDie(2) == 1) {
+					magicItem.description += ' ' + typeOfPower + ' Boost Trait(Smarts)';
+				} else {
+					magicItem.description += ' ' + typeOfPower + ' Boost Trait(Spirit)';
+				}
+			} else {
+				var trait = rollDie(3);
+				if (trait == 1) {
+					magicItem.description += ' ' + typeOfPower + ' Boost Trait(Agility)';
+				} else if (trait == 2) {
+					magicItem.description += ' ' + typeOfPower + ' Boost Trait(Strength)';
+				} else {
+					magicItem.description += ' ' + typeOfPower + ' Boost Trait(Vigor)';
+				}
+			}
+		} else if (die > 3 && die <= 5 ) {
+			magicItem.description += ' ' + typeOfPower + ' Burrow';
+		} else if (die == 6) {
+			magicItem.description += ' ' + typeOfPower + ' Burst';
+		} else if (die == 7) {
+			magicItem.description += ' ' + typeOfPower + ' Deflection';
+		} else if (die > 7 && die <= 10 ) {
+			magicItem.description += ' ' + typeOfPower + ' Environmental Protection (element)';
+		} else if (die == 11) {
+			magicItem.description += ' ' + typeOfPower + ' Fear';
+		} else if (die == 12) {
+			magicItem.description += ' ' + typeOfPower + ' Fly';
+		} else if (die > 12 && die <= 14 ) {
+			magicItem.description += ' ' + typeOfPower + ' Invisibility';
+		} else if (die > 14 && die <= 16 ) {
+			magicItem.description += ' ' + typeOfPower + ' Quickness';
+		} else if (die == 17) {
+			magicItem.description += ' ' + typeOfPower + ' Shape Change';
+		} else if (die > 17 && die <= 19 ) {
+			magicItem.description += ' ' + typeOfPower + ' Speed';
+		} else if (die == 20) {
+			magicItem.description += ' ' + typeOfPower + ' Teleport';
+		}
+		powerNumber--;
+	}
+}
+
+
 // //Table 1J: Named Items
 function table1J(magicItem) {
 	var die = rollDie(20);
@@ -333,34 +385,6 @@ function table1J(magicItem) {
 		magicItem.description = "Thief's Jerkin (p51)";		
 	}
 }
-
-
-// //Table 1I: Powers
-// //Powers are rolled or chosen from Table 1I. Powers which can affect multiple aspects (such as boost trait) must have a single, fixed aspect chosen during creation. This cannot be changed. Unless otherwise stated, magic items that cast powers have an arcane skill of d8 and 10 Power Points.
-
-// //d20 Type
-// 1 "Beast Friend"
-// 2 "Boost Trait (usually Smarts or Spirit in a helmet, Agility, Strength, or Vigor in armor)"
-// 3 "Boost Trait (usually Smarts or Spirit in a helmet, Agility, Strength, or Vigor in armor)"
-// 4 "Burrow"
-// 5 "Burrow"
-// 6 "Burst"
-// 7 "Deflection"
-// 8 "Environmental Protection (one element)"
-// 9 "Environmental Protection (one element)"
-// 10 "Environmental Protection (one element)"
-// 11 "Fear"
-// 12 "Fly"
-// 13 "Invisibility"
-// 14 "Invisibility"
-// 15 "Quickness"
-// 16 "Quickness"
-// 17 "Shape Change"
-// 18 "Speed"
-// 19 "Speed"
-// 20 "Teleport"
-
-
 
 function rollDie(sides)
   {
