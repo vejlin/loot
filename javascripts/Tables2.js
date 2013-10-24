@@ -138,7 +138,7 @@ function table2D(magicItem, dieNumber) {
 //d20 Cost Type
 function table2E(magicItem) {
 	var edgeValue = rollDie(3);
-	while (edgeValue != 0) {
+	while (edgeValue > 0) {
 		var die = rollDie(20);
 		var edge = '';
 		var price = 0;
@@ -164,19 +164,19 @@ function table2E(magicItem) {
 		} else if (die > 10 && die <= 12 ) {
 			price += 6000;
 			edge = ' Giant Killer ';
-		} else if (die == 13 ) {
+		} else if (die == 13 && edgeValue > 1) {
 			price += 10000;
 			edge = ' Improved Block ';
 			slot = 2;
-		} else if (die == 14 ) {
+		} else if (die == 14 && edgeValue > 1) {
 			price += 2000;
 			edge = ' Improved First Strike ';
 			slot = 2;
-		} else if (die == 15 ) {
+		} else if (die == 15 && edgeValue > 1) {
 			price += 2000;
 			edge = ' Improved Frenzy ';
 			slot = 2;
-		} else if (die == 16 ) {
+		} else if (die == 16 && edgeValue > 1) {
 			price += 2000;
 			edge = ' Improved Sweep ';
 			slot = 2;
@@ -198,7 +198,7 @@ function table2E(magicItem) {
 // //Table 2F: Powers
 // //Powers are rolled or chosen from Table 1I. Powers which can affect multiple aspects (such as boost trait) must have a single, fixed aspect chosen during creation. This cannot be changed. Unless otherwise stated, magic items that cast powers have an arcane skill of d8 and 10 Power Points.
 function table2F(magicItem, powerNumber, typeOfPower) {
-	while(powerNumber != 0) {
+	while(powerNumber > 0) {
 		var die = rollDie(20);
 		if (die <= 3) {
 			magicItem.description += ' ' + typeOfPower + ' Armor';
@@ -237,7 +237,7 @@ function table2G(magicItem) {
 	} else if (die > 5 && die <= 7 ) {
 		magicItem.price = 9025;
 		magicItem.type = 'Dagger';
-		magicItem.description = 'Fearmonger (p51)';		
+		magicItem.description = 'Fearmonger (p53)';		
 	} else if (die > 7 && die <= 10 ) {
 		magicItem.price = 5500;
 		magicItem.type = 'Great Axe';
@@ -253,6 +253,6 @@ function table2G(magicItem) {
 	} else if (die > 17) {
 		magicItem.price = 14250;
 		magicItem.type = 'Spear';
-		magicItem.description = "Pathblocker (p51)";		
+		magicItem.description = "Pathblocker (p54)";		
 	}
 }
