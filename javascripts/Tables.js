@@ -84,7 +84,7 @@ function magicItem(loot,scenario) {
 		table1A(loot.magicItem);
 	} else if (die > 2 && die <= 5 ) {
 		table2A(loot.magicItem);
-	} else if (die > 6 && die <= 7 ) {
+	} else if (die > 5 && die <= 7 ) {
 		table3A(loot.magicItem,scenario);
 	// } else if (die > 8 && die <= 11 ) {
 	// 	table4A(magicItem);
