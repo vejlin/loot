@@ -2,9 +2,9 @@
 //2d20
 function table3A(magicItem,scenario) {
 	if (scenario == 1) {
-
+		table3A_SF(magicItem);
 	} else {
-
+		table3A_BF(magicItem);
 	}
 }
 function table3A_SF(magicItem) {

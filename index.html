@@ -4,6 +4,7 @@
 	<script type="text/javascript" src="javascripts/Tables.js"></script>
 	<script type="text/javascript" src="javascripts/Tables1.js"></script>
 	<script type="text/javascript" src="javascripts/Tables2.js"></script>
+	<script type="text/javascript" src="javascripts/Tables3.js"></script>
 	<style type="text/css" media="screen">
 	 body {
 	   font: 12pt "Verdana";
@@ -32,8 +33,13 @@
   		<option value="3">Rich</option>
      	<option value="4">Treasure Trove</option>
 	</select>
+	<p>Choose scenario setting</p>
+	<select id="scenario">
+  		<option value="1">Standard fantasy</option>
+  		<option value="2">Blackpowder fantasy</option>
+	</select>
 
-<p>Click the button to get loot: <button onclick="loot(getOption('treasure'))">Loot</button></p>
+<p>Click the button to get loot: <button onclick="loot(getOption('treasure'),getOption('scenario'))">Loot</button></p>
 
 <p>Click the button to reset: <button onclick="location.reload();">Reload</button></p>
 
@@ -50,10 +56,10 @@
 
 
 <script>
-function loot(type)
+function loot(type,scenario)
 {
 	var line = document.createElement("p");
-	line.innerHTML = treasure(type).getInfo();
+	line.innerHTML = treasure(type,scenario).getInfo();
 	var output = document.getElementById("output");
 	output.insertBefore(line, output.firstChild);
 }

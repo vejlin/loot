@@ -38,7 +38,7 @@ function MagicItem () {
 //2 = Worthwhile
 //3 = Rich
 //4 = Treasure trove
-function treasure(type) {
+function treasure(type,scenario) {
 	var loot = new Loot();
 	var treasureDie = rollDie(10);
 	var magicItemPercent = rollDie(100);
@@ -46,24 +46,24 @@ function treasure(type) {
 	if (type == 1) {
 		money = treasureCalc(10,100);
 		if (magicItemPercent == 1) {
-			magicItem(loot);
+			magicItem(loot,scenario);
 		}
 	}
 	else if (type == 2) {
 		money = treasureCalc(100,1000);
 		if (magicItemPercent <= 25) {
-			magicItem(loot);
+			magicItem(loot,scenario);
 		}
 	}
 	else if (type == 3) {
 		money = treasureCalc(500,5000);
 		if (magicItemPercent <= 50) {
-			magicItem(loot);
+			magicItem(loot,scenario);
 		}
 	}
 	else if (type == 4) {
 		money = treasureCalc(1000,10000);
-		magicItem(loot);
+		magicItem(loot,scenario);
 	}
 	loot.money = money;
 	return loot;
@@ -77,15 +77,15 @@ function treasureCalc(min, max) {
 	return money;
 }
 
-function magicItem(loot) {
+function magicItem(loot,scenario) {
 	loot.magicItem = new MagicItem();
-	var die = rollDie(5);
+	var die = rollDie(7);
 	if (die <= 2 ) {
 		table1A(loot.magicItem);
 	} else if (die > 2 && die <= 5 ) {
 		table2A(loot.magicItem);
-	// } else if (die > 6 && die <= 7 ) {
-	// 	table3A(magicItem);
+	} else if (die > 6 && die <= 7 ) {
+		table3A(loot.magicItem,scenario);
 	// } else if (die > 8 && die <= 11 ) {
 	// 	table4A(magicItem);
 	// } else if (die > 12 && die <= 14 ) {
