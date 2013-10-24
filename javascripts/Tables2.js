@@ -26,13 +26,8 @@ function table2A(magicItem) {
 	} else if (die == 17) {
 		magicItem.type = 'Katana';
 		magicItem.price = 1000;
-	} else if (die > 17 && die <= 19) {
+	} else if (die > 17 && die <= 23) {
 		magicItem.type = 'Long sword';
-		magicItem.price = 300;
-	} else if (die == 20) {
-		table2G(magicItem);
-	} else if (die > 20 && die <= 23) {
-		magicItem.type = 'Long Sword';
 		magicItem.price = 300;
 	} else if (die == 24 ) {
 		magicItem.type = 'Lance';
@@ -220,39 +215,5 @@ function table2F(magicItem, powerNumber, typeOfPower) {
 			magicItem.description += ' ' + typeOfPower + ' Smite (fire trapping)';
 		}
 		powerNumber--;
-	}
-}
-
-// //Table 2G: Named Items
-function table2G(magicItem) {
-	var die = rollDie(20);
-	if (die <= 2) {
-		magicItem.price = 7500;
-		magicItem.type = 'Axe';
-		magicItem.description = "Axe of the Berserker (p53)";
-	} else if (die > 2 && die <= 5 ) {
-		magicItem.price = 13150;
-		magicItem.type = 'Rapier';
-		magicItem.description = 'Duelists blade (p53)';		
-	} else if (die > 5 && die <= 7 ) {
-		magicItem.price = 9025;
-		magicItem.type = 'Dagger';
-		magicItem.description = 'Fearmonger (p53)';		
-	} else if (die > 7 && die <= 10 ) {
-		magicItem.price = 5500;
-		magicItem.type = 'Great Axe';
-		magicItem.description = "Giant slayer (p54)";		
-	} else if (die > 10 && die <= 13 ) {
-		magicItem.price = 1900;
-		magicItem.type = 'Great sword';
-		magicItem.description = 'Head taker (p54)';		
-	} else if (die > 13 && die <= 17 ) {
-		magicItem.price = 3300;
-		magicItem.type = 'Long sword';
-		magicItem.description = 'Orcbane (p54)';		
-	} else if (die > 17) {
-		magicItem.price = 14250;
-		magicItem.type = 'Spear';
-		magicItem.description = "Pathblocker (p54)";		
 	}
 }

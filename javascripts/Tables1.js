@@ -3,12 +3,9 @@ function table1A(magicItem) {
 	if (die <= 15) {
 		magicItem.type = 'Armor';
 		table1B(magicItem);
-	} else if (die > 15 && die <= 19 ) {
+	} else if (die > 15) {
 		magicItem.type = 'Shield';
 		table1D(magicItem);
-	} else if (die == 20 ) {
-		table1J(magicItem);
-	}
 }
 // //Table 1B: Armor
 // //Roll a d20 to determine the exact armor type, then roll on Table 1C to determine the specific bonus.
@@ -258,49 +255,3 @@ function table1I(magicItem, powerNumber, typeOfPower) {
 		powerNumber--;
 	}
 }
-
-
-// //Table 1J: Named Items
-function table1J(magicItem) {
-	var die = rollDie(20);
-	if (die <= 2) {
-		magicItem.price = 6550;
-		magicItem.type = 'Armor';
-		magicItem.subType = 'Leather';
-		magicItem.description = "Assassin's Armor (p51)";
-	} else if (die > 2 && die <= 7 ) {
-		magicItem.price = 2400;
-		magicItem.type = 'Armor';
-		magicItem.subType = 'Plate corselet';
-		magicItem.description = 'Breastplate of Heroes (p51)';		
-	} else if (die > 7 && die <= 9 ) {
-		magicItem.price = 5150;
-		magicItem.type = 'Shield';
-		magicItem.subType = 'Medium';
-		magicItem.description = 'Dragon Shield (p51)';		
-	} else if (die > 9 && die <= 12 ) {
-		magicItem.price = 4300;
-		magicItem.type = 'Armor';
-		magicItem.subType = 'Chain hauberk';
-		magicItem.description = "Dragon Slayer's Armor (p51)";		
-	} else if (die > 12 && die <= 15 ) {
-		magicItem.price = 5300;
-		magicItem.type = 'Armor';
-		magicItem.subType = 'Chain hauberk';
-		magicItem.description = 'Hauberk of the Mage Slayer (p51)';		
-	} else if (die > 15 && die <= 17 ) {
-		magicItem.price = 4650;
-		magicItem.type = 'Helm';
-		magicItem.subType = 'Steel helmet';
-		magicItem.description = 'Helm of the General (p51)';		
-	} else if (die > 17) {
-		magicItem.price = 2050;
-		magicItem.type = 'Armor';
-		magicItem.subType = 'Leather';
-		magicItem.description = "Thief's Jerkin (p51)";		
-	}
-}
-
-
-
-
