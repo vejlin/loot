@@ -79,7 +79,7 @@ function treasureCalc(min, max) {
 
 function magicItem(loot,scenario) {
 	loot.magicItem = new MagicItem();
-	var die = 15;//rollDie(16);
+	var die = rollDie(20);
 	if (die <= 2 ) {
 		table1A(loot.magicItem);
 	} else if (die > 2 && die <= 5 ) {
@@ -92,12 +92,13 @@ function magicItem(loot,scenario) {
 		table5(loot.magicItem);
 	} else if (die > 14 && die <= 16 ) {
 		table6(loot.magicItem);
-	// } else if (die > 16 && die <= 18 ) {
-	// 	table7A(loot.magicItem);
-	// } else if (die == 19 ) {
-	// 	table8(loot.magicItem);
-	// } else if (die == 20 ) {
-	// 	table9A(loot.magicItem);
+	} else if (die > 16 && die <= 18 ) {
+		table7A(loot.magicItem);
+	} else if (die == 19 ) {
+		loot.magicItem.type = 'Tome';
+		table7B(loot.magicItem);
+	} else if (die == 20 ) {
+		table9A(loot.magicItem);
 	}
 }
 
