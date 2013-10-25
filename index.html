@@ -13,29 +13,109 @@
 	<style type="text/css" media="screen">
     body {
       font: 12pt "Verdana";
+      margin: 0px;
+    }
+    form {
+      padding: 0;
     }
     header {
+      position: fixed;
+      top: 0px;
+      width: 100%;
+      background-color: white;
+    }
+    footer {
       font-size: 9pt;
       text-align: center;
     }
-    form {
-      border: 1px gray solid;
-      padding: 0;
+    #logo {
+      float: left;
     }
-    form div > * {
-      padding-left: 2em;
-      padding-right: 2em;
+    #campaign {
+      padding-top: 2em;
+    }
+    #campaign h3 {
+      display: inline;
+    }
+    #button-pane button {
+      font-size: 16px;
     }
     #output {
+      margin-top: 128px;
       font: 12pt "Monarco", "Courier New";
       color: gray;
       background-color: #efefef;
       display: inline-block;
       width: 100%;
     }
+    #output > p {
+      padding-left: 2em;
+      padding-right: 2em;
+    }
     #output p:first-child {
       color: black;
       font-weight: bold;
+    }
+    #output center:last-child { display: none; }
+    #output center:first-child { display: block; }
+
+    /* iPad styling */
+    @media  all and (max-width: 768px), only screen and (max-device-width : 1024px) {
+      header { height: 64px; }
+      #campaign {
+        width: 150px;
+        padding-top: 9px;
+        float: left;
+      }
+      #campaign h3 {
+        font-size: 13px;
+        padding: 0px;
+      }
+      #logo {
+        width: 100px;
+        height: 64px;
+      }
+      #button-pane {
+        float: right;
+        margin: 0px;
+      }
+      #button-pane button {
+        margin: 0px;
+        float: left;
+        height: 64px;
+      }
+      #bullet {
+        display: none;
+      }
+      #output {
+        margin-top: 64px;
+      }
+    }
+
+    /* iPhone styling */
+    @media all and (max-width: 640px), only screen and (max-device-width: 568px)  {
+      header {
+        height: 48px;
+      }
+      #campaign {
+        float: none;
+        width: auto;
+        height: 23px;
+      }
+      #logo {
+        width: 75px;
+        height: 48px;
+      }
+      #button-pane {
+        float: none;
+      }
+      #button-pane button {
+        font-size: 14px;
+        height: 25px;
+      }
+      #output {
+        margin-top: 58px;
+      }
     }
 	</style>
   <script>
@@ -98,37 +178,38 @@
 </head>
 
 <body>
-  <header>
-    <img src="images/SW_Fan_Small.gif"><br>
-    <p><strong>
-      “This game references the Savage Worlds game system, available from Pinnacle Entertainment Group at
-      <a href="http:\\www.peginc.com" target="_new">www.peginc.com</a>.<br>
-      Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission.<br>
-      Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.”
-    </strong></p>
-  </header>
-
   <form>
-    <div>
-      <h3>
-        Choose type of treasure
+    <header>
+      <img id="logo" src="images/SW_Fan_Small.gif">
+      <div id="campaign">
+        <h3>
+          Generate Treasure!
+        </h3>
         <select id="scenario">
           <option value="1">Standard fantasy</option>
           <option value="2">Blackpowder fantasy</option>
         </select>
-      </h3>
+      </div>
 
-      <p>
+      <p id="button-pane">
         <button type="button" onclick="loot(1)">Meager</button>
         <button type="button" onclick="loot(2)">Worthwhile</button>
         <button type="button" onclick="loot(3)">Rich</button>
         <button type="button" onclick="loot(4)">Treasure Trove</button>
-        &bull;
+        <span id="bullet">&bull;</span>
         <button type="button" onclick="clearOutput()">Clear</button>
       </p>
-    </div>
+    </header>
 
-    <div id="output"></div>
+    <div id="output"><center><p> &lt; &lt; click the buttons to generate treasure! &gt; &gt; </p></center></div>
   </form>
+  <footer>
+    <p><strong>
+    “This game references the Savage Worlds game system, available from Pinnacle Entertainment Group at
+    <a href="http:\\www.peginc.com" target="_new">www.peginc.com</a>.
+    Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission.
+    Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.”
+    </strong></p>
+  </footer>
 </body>
 </html>
