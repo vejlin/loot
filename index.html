@@ -9,68 +9,124 @@
 	<script type="text/javascript" src="javascripts/Tables5.js"></script>
 	<script type="text/javascript" src="javascripts/Tables6.js"></script>
 	<style type="text/css" media="screen">
-	 body {
-	   font: 12pt "Verdana";
-	 }
-	 #output {
- 	   font: 12pt "Monarco", "Courier New";
-	   color: gray;
-	   background-color: #efefef;
-	 }
-	 #output p:first-child {
-	   color: black;
-	   font-weight: bold;
-	 }
+    body {
+      font: 12pt "Verdana";
+    }
+    header {
+      font-size: 9pt;
+      text-align: center;
+    }
+    form {
+      border: 1px gray solid;
+      padding: 0;
+    }
+    form div > * {
+      padding-left: 2em;
+      padding-right: 2em;
+    }
+    #output {
+      font: 12pt "Monarco", "Courier New";
+      color: gray;
+      background-color: #efefef;
+      display: inline-block;
+      width: 100%;
+    }
+    #output p:first-child {
+      color: black;
+      font-weight: bold;
+    }
 	</style>
+  <script>
+    function loot(type) {
+      var selectedScenario = scenario();
+      var output = document.getElementById("output");
+      var lootedTreasure = treasure(type,scenario);
+      var treasureParts = breakTreasureIntoParts(lootedTreasure);
+
+      var toHtml = function(str) { return elm("div", [txt(str)]); }
+      var line = elm("p", treasureParts.map(toHtml));
+
+      output.insertBefore(line(), output.firstChild);
+    }
+
+    function scenario(optionName) {
+      var e = document.getElementById('scenario');
+      return e.options[e.selectedIndex].value;
+    }
+
+    function breakTreasureIntoParts(t) {
+      var item = t.magicItem;
+      var parts = ["Money: " + t.money];
+
+      if (item) {
+        parts.push("Type: " + item.type);
+        parts.push("Price: " + item.price);
+        if (item.subType) {
+          parts.push("SubType: " + item.subType);
+        }
+        if (item.description) {
+          parts.push("Description: " + item.description);
+        }
+      }
+
+      return parts;
+    }
+
+    var txt = function(text) {
+      return function txt() {
+        return document.createTextNode(text);
+      }
+    }
+    
+    var elm = function(tag, children) {
+      return function elm() {
+        var element = document.createElement(tag);
+        children.forEach(function(child) {
+          var childElm = child();
+          element.appendChild(childElm);
+        });
+        return element;
+      }
+    }
+
+    function clearOutput() {
+      document.getElementById('output').innerHTML = '';
+    }
+  </script>
 </head>
+
 <body>
-<img src="images/SW_Fan_Small.gif"><br>
-<h6>“This game references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:\\www.peginc.com" target="_new">www.peginc.com</a>.<br>Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission.<br>Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.”</h6>
-<br>
+  <header>
+    <img src="images/SW_Fan_Small.gif"><br>
+    <p><strong>
+      “This game references the Savage Worlds game system, available from Pinnacle Entertainment Group at
+      <a href="http:\\www.peginc.com" target="_new">www.peginc.com</a>.<br>
+      Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission.<br>
+      Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.”
+    </strong></p>
+  </header>
 
+  <form>
+    <div>
+      <h3>
+        Choose type of treasure
+        <select id="scenario">
+          <option value="1">Standard fantasy</option>
+          <option value="2">Blackpowder fantasy</option>
+        </select>
+      </h3>
 
-	<p>Choose type of treasure</p>
-	<select id="treasure">
-  		<option value="1">Meager</option>
-  		<option value="2">Worthwhile</option>
-  		<option value="3">Rich</option>
-     	<option value="4">Treasure Trove</option>
-	</select>
-	<p>Choose scenario setting</p>
-	<select id="scenario">
-  		<option value="1">Standard fantasy</option>
-  		<option value="2">Blackpowder fantasy</option>
-	</select>
+      <p>
+        <button type="button" onclick="loot(1)">Meager</button>
+        <button type="button" onclick="loot(2)">Worthwhile</button>
+        <button type="button" onclick="loot(3)">Rich</button>
+        <button type="button" onclick="loot(4)">Treasure Trove</button>
+        &bull;
+        <button type="button" onclick="clearOutput()">Clear</button>
+      </p>
+    </div>
 
-<p>Click the button to get loot: <button onclick="loot(getOption('treasure'),getOption('scenario'))">Loot</button></p>
-
-<p>Click the button to reset: <button onclick="location.reload();">Reload</button></p>
-
-<div id="output"></div>
-<!-- 
-  <div id='money'>10</div>
-  <div id='item'>
-  <div id='item.type'>Armor</div>
-  <div id='item.price'>10</div>
-  <div id='item.subType'>Leather</div>
-  <div id='item.description'>+1 Toughness</div>
-  </div>
--->
-
-
-<script>
-function loot(type,scenario)
-{
-	var line = document.createElement("p");
-	line.innerHTML = treasure(type,scenario).getInfo();
-	var output = document.getElementById("output");
-	output.insertBefore(line, output.firstChild);
-}
-function getOption(optionName) {
-	var e = document.getElementById(optionName);
-	return e.options[e.selectedIndex].value;
-}
-</script> 
-
+    <div id="output"></div>
+  </form>
 </body>
 </html>

@@ -1,16 +1,9 @@
+
 //Side 48 Fantasy Companion
 //Loot object for displaying the end result
 function Loot () {
     this.money = 0;
     this.magicItem = null;
-    this.getInfo = function getInfo() {
-    	if (this.magicItem !== null) {
-        	return "<div id='money'>Treasure: " + this.money + "</div><div id='item'>" + this.magicItem.getInfo() + '</div>';
-        } else {
-        	return 'Treasure: ' + this.money;
-        }
-
-    };
 }
 
 //Magic Item object
@@ -19,18 +12,6 @@ function MagicItem () {
     this.type = '';
     this.subType = null;
     this.description = null;
-    this.getInfo = function getInfo() {
-    	var info = '';
-    	info = "<div id='item.type'>Type: " + this.type + "</div>";
-    	info += "<div id='item.price'>Price: " + this.price + "</div>";
-    	if (this.subType != null) {
-    		info += "<div id='item.subType'>SubType:" + this.subType +  "</div>";
-    	}
-    	if (this.description != null) {
-    		info += "<div id='item.description'> Description: " + this.description + "</div>"
-    	}
-        return  info;
-    }
 }
 
 //Depending on type how much loot is given
