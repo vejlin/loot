@@ -79,25 +79,25 @@ function treasureCalc(min, max) {
 
 function magicItem(loot,scenario) {
 	loot.magicItem = new MagicItem();
-	var die = rollDie(7);
+	var die = 15;//rollDie(16);
 	if (die <= 2 ) {
 		table1A(loot.magicItem);
 	} else if (die > 2 && die <= 5 ) {
 		table2A(loot.magicItem);
 	} else if (die > 5 && die <= 7 ) {
 		table3A(loot.magicItem,scenario);
-	// } else if (die > 8 && die <= 11 ) {
-	// 	table4A(magicItem);
-	// } else if (die > 12 && die <= 14 ) {
-	// 	table5(magicItem);
-	// } else if (die > 15 && die <= 16 ) {
-	// 	table6(magicItem);
+	} else if (die > 7 && die <= 11 ) {
+		table4(loot.magicItem);
+	} else if (die > 11 && die <= 14 ) {
+		table5(loot.magicItem);
+	} else if (die > 14 && die <= 16 ) {
+		table6(loot.magicItem);
 	// } else if (die > 16 && die <= 18 ) {
-	// 	table7A(magicItem);
+	// 	table7A(loot.magicItem);
 	// } else if (die == 19 ) {
-	// 	table8(magicItem);
+	// 	table8(loot.magicItem);
 	// } else if (die == 20 ) {
-	// 	table9A(magicItem);
+	// 	table9A(loot.magicItem);
 	}
 }
 

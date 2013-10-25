@@ -6,6 +6,7 @@ function table1A(magicItem) {
 	} else if (die > 15) {
 		magicItem.type = 'Shield';
 		table1D(magicItem);
+	}
 }
 // //Table 1B: Armor
 // //Roll a d20 to determine the exact armor type, then roll on Table 1C to determine the specific bonus.
